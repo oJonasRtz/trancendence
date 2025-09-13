@@ -1,0 +1,32 @@
+// Set framework
+
+const fastify = require('fastify')({ logger: true });
+
+const path = require('path'); 
+
+// Set routes path
+
+const userRoutes = require(path.resolve(__dirname, 'routes', 'users.js'));
+const tournamentRoutes = require(path.resolve(__dirname, 'routes', 'tournaments.js'));
+const healthRoutes = require(path.resolve(__dirname, 'routes', 'health.js'));
+
+// Set handlers
+
+require(path.resolve(__dirname, 'handlers', 'notFoundHandler.js'))(fastify);
+require(path.resolve(__dirname, 'handlers', 'errorHandler.js'))(fastify);
+
+// Set Database
+
+fastify.register(require(path.resolve(__dirname, 'src', 'plugins', 'database')));
+
+fastify.get('/', async (request, reply) => {
+  return { hello: 'world', database: 'connected' };
+});
+
+// Register routes
+
+fastify.register(userRoutes, {prefix: '/api/users'});
+fastify.register(tournamentRoutes, {prefix: '/api/tournaments'});
+fastify.register(healthRoutes);
+
+module.exports = fastify;
