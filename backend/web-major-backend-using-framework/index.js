@@ -11,6 +11,7 @@ const authRoutes = require(path.resolve(__dirname, 'routes', 'auth.js'));
 const relationsRoutes = require(path.resolve(__dirname, 'routes', 'relations.js'));
 const lobbiesRoutes = require(path.resolve(__dirname, 'routes', 'lobbies.js'));
 const matchmakingRoutes = require(path.resolve(__dirname, 'routes', 'matchmaking.js'));
+const matchesRoutes = require(path.resolve(__dirname, 'routes', 'matches.js'));
 const tournamentRoutes = require(path.resolve(__dirname, 'routes', 'tournaments.js'));
 const healthRoutes = require(path.resolve(__dirname, 'routes', 'health.js'));
 
@@ -34,6 +35,7 @@ fastify.register(authRoutes, { prefix: '/api/test/users' });
 fastify.register(relationsRoutes, { prefix: '/api/friends' });
 fastify.register(lobbiesRoutes, { prefix: '/api/lobbies' });
 fastify.register(matchmakingRoutes, { prefix: '/api/matchmaking' });
+fastify.register(matchesRoutes, { prefix: '/api/matches' });
 fastify.register(tournamentRoutes, { prefix: '/api/tournaments' });
 fastify.register(healthRoutes);
 
