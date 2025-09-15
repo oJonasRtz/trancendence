@@ -2,26 +2,38 @@ const path = require('path');
 const AuthUtils = require(path.resolve(__dirname, '..', 'src', 'utils', 'auth'));
 
 async function usersRoutes(fastify, options) {
+
+	// Partial update (Nickname, avatar)
 	fastify.patch('/update/:id', async (request, reply) => {
-		const { id } = request.params;
-		const { username, email, password } = request.body;
 		return reply.code(200).send('Success update user');
 	});
+
+	// Remove a user
 	fastify.delete('/remove/:id', async (request, reply) => {
 		const { id } = request.params;
 		return reply.code(204).send();
 	});
+
+	// Get list with all users
+
 	fastify.get('/', async (request, reply) => {
 		return reply.code(200).send('Toma todo os usuários');
 	});
+
+	// Get a user specified by an ID
+
 	fastify.get('/:id', async (request, reply) => {
 		const { id } = request.params;
 		return reply.code(200).send('Toma o usuário de id especificado');
 	});
+
+	// Get a user specified by a query
+
 	fastify.get('/search', async (request, reply) => {
-		const { filterByNickInitial } = request.query;
+		const { nickStartWith } = request.query;
 		return reply.code(200).send('Toma a pesquisa aproximada pelo nick do usuário');
 	});
+
 	fastify.post('/register', async (request, reply) => {
 		try {
 			const { username, email, password } = request.body;
@@ -50,11 +62,25 @@ async function usersRoutes(fastify, options) {
 			return reply.code(500).send({ error: 'Internal server error' });
 		}
 	});
+
+	// Substitute an entire user, full update
 	fastify.put('/update/:id', async (request, reply) => {
 		const { id } = request.params;
 		const { username, email, password } = request.body;
 
 		return reply.code(200).send('Success update user');
+	});
+
+	// Obtain status of user
+	fastify.get('/:id/stats', async (request, reply) => {
+		const { id } = req.params;
+		return reply.code(200).send('Status do usuário, vitórias, derrotas e mais');
+	});
+
+	// Upload an avatar
+	fastify.post('/:id/avatar', async (request, reply) => {
+		const { id } = req.params;
+		return reply.code(200).send('O avatar foi enviado camarada');
 	});
 }
 module.exports = usersRoutes; 

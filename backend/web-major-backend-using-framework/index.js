@@ -2,11 +2,15 @@
 
 const fastify = require('fastify')({ logger: true });
 
-const path = require('path'); 
+const path = require('path');
 
 // Set routes path
 
 const userRoutes = require(path.resolve(__dirname, 'routes', 'users.js'));
+const authRoutes = require(path.resolve(__dirname, 'routes', 'auth.js'));
+const relationsRoutes = require(path.resolve(__dirname, 'routes', 'relations.js'));
+const lobbiesRoutes = require(path.resolve(__dirname, 'routes', 'lobbies.js'));
+const matchmakingRoutes = require(path.resolve(__dirname, 'routes', 'matchmaking.js'));
 const tournamentRoutes = require(path.resolve(__dirname, 'routes', 'tournaments.js'));
 const healthRoutes = require(path.resolve(__dirname, 'routes', 'health.js'));
 
@@ -25,8 +29,12 @@ fastify.get('/', async (request, reply) => {
 
 // Register routes
 
-fastify.register(userRoutes, {prefix: '/api/users'});
-fastify.register(tournamentRoutes, {prefix: '/api/tournaments'});
+fastify.register(userRoutes, { prefix:'/api/users' });
+fastify.register(authRoutes, { prefix: '/api/test/users' });
+fastify.register(relationsRoutes, { prefix: '/api/friends' });
+fastify.register(lobbiesRoutes, { prefix: '/api/lobbies' });
+fastify.register(matchmakingRoutes, { prefix: '/api/matchmaking' });
+fastify.register(tournamentRoutes, { prefix: '/api/tournaments' });
 fastify.register(healthRoutes);
 
 module.exports = fastify;

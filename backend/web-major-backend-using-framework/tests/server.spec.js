@@ -38,7 +38,7 @@ describe ('Testando as rotas GET', () => {
 
 	test('Testando query inexistente', async () => {
 		const response = await supertest(fastify.server)
-		.get('/api/users/search?filterByNickInitial=asakldfjkasldjfsçk')
+		.get('/api/users/search?nickStartWith=asakldfjkasldjfsçk')
 		.expect(200); // Vai mudar para 404
 	});
 });
