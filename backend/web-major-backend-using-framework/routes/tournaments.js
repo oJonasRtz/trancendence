@@ -1,4 +1,5 @@
 async function tournamentRoutes(fastify, options) {
+	// Cria um torneio
 	fastify.post('/', async (request, reply) => {
 	try {
 		const { name, maxParticipants } = request.body;
@@ -12,16 +13,41 @@ async function tournamentRoutes(fastify, options) {
     	return reply.code(500).send({ error: 'Internal server error' });
   }
 });
+	// Lista os torneios
+	fastify.get('/', async (request, reply) => {
+		try {
+			const tournaments = await fastify.dbQueries.getAllTournaments();
+			return reply.send({ tournaments });
+		} catch (error) {
+			fastify.log.error(error);
+			return reply.code(500).send({ error: 'Internal server error' });
+		}
+	});
 
-fastify.get('/', async (request, reply) => {
-	try {
-		const tournaments = await fastify.dbQueries.getAllTournaments();
-		return reply.send({ tournaments });
-	} catch (error) {
-		fastify.log.error(error);
-		return reply.code(500).send({ error: 'Internal server error' });
-	}
-});
+	// Obter um torneio específico
+	fastify.get('/:id', async (request, reply) => {
+		return reply.code(200).send('Seu torneio específico');
+	});
+
+	// editar detalhes de um torneio
+	fastify.patch('/:id', async (request, reply) => {
+		return reply.code(200).send('Editando o torneio de id especificado');
+	});
+
+	// inscrever time/jogador
+	fastify.post('/:id/register', async (request, reply) => {
+		return reply.code(200).send('Time/Jogador registrado no torneio');
+	});
+
+	// ranking to torneio
+	fastify.get('/:id/leaderboard', async (request, reply) => {
+		return reply.code(200).send('O ranking do torneio');
+	});
+
+	// semente da partida, o identificador chave único
+	fastify.post('/:id/seed', async (request, reply) => {
+		return reply.code(200).send('enviada a chave única do torneio');
+	});
 }
 
 module.exports = tournamentRoutes;

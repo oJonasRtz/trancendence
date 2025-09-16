@@ -13,6 +13,7 @@ const lobbiesRoutes = require(path.resolve(__dirname, 'routes', 'lobbies.js'));
 const matchmakingRoutes = require(path.resolve(__dirname, 'routes', 'matchmaking.js'));
 const matchesRoutes = require(path.resolve(__dirname, 'routes', 'matches.js'));
 const tournamentRoutes = require(path.resolve(__dirname, 'routes', 'tournaments.js'));
+const channelsRoutes = require(path.resolve(__dirname, 'routes', 'channels.js'));
 const healthRoutes = require(path.resolve(__dirname, 'routes', 'health.js'));
 
 // Set handlers
@@ -37,6 +38,7 @@ fastify.register(lobbiesRoutes, { prefix: '/api/lobbies' });
 fastify.register(matchmakingRoutes, { prefix: '/api/matchmaking' });
 fastify.register(matchesRoutes, { prefix: '/api/matches' });
 fastify.register(tournamentRoutes, { prefix: '/api/tournaments' });
+fastify.register(channelsRoutes, { prefix: '/api/channels' });
 fastify.register(healthRoutes);
 
 module.exports = fastify;
