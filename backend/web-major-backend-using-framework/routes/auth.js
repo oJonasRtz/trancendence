@@ -8,6 +8,10 @@ async function authRoutes (fastify, options) {
 	fastify.post('/login', async (request, reply) => {
 		return reply.code(200).send('Login efetuado com sucesso');
 	});
+	// Logout
+	fastify.post('/logout', async (request, reply) => {
+		return reply.code(200).send('Logout efetuado com sucesso');
+	});
 
 	// Refresh -> validate the access again
 	fastify.post('/refresh', async (request, reply) => {
