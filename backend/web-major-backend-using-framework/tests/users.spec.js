@@ -13,69 +13,68 @@ afterAll(async () => {
 
 describe ('Começando os testes focando no usuário', () => {
 	// Atualizar os dados cadastrados de um usuário (avatar, nickname, email, senha...)
-	test('atualizar dados do usuário', async () => {
+	test('Atualização parcial do usuário', async () => {
 		const response = await supertest(fastify.server)
 		.patch('/api/users/update/1')
 		.send({})
 		.expect(200);
 	});
 
-	// Rota para remover um usuário do banco de dados
-	test('remover um usuário', async () => {
+	// Remover um usuário do banco de dados
+	test('Remover um usuário', async () => {
 		const response = await supertest(fastify.server)
 		.delete('/api/users/remove/1')
-		.expect(200);
+		.expect(204);
 	});
 
-	// Consultar a lista de usuários completa
-	
-	test('receber a lista completa de usuários', async () => {
+	// Receber a lista completa de usuários cadastrados
+	test('Receber a lista completa de usuários do cadastrados', async () => {
 		const response = await supertest(fastify.server)
 		.get('/api/users')
 		.expect(200);
 	});
 
-	// consultar um usuário por ID
-	
-	test('receber um usuário pelo ID especificado', async () => {
+	// Receber usuário especificado por ID
+	test('Receber o usuário especificado pelo ID', async () => {
 		const response = await supertest(fastify.server)
 		.get('/api/users/:id')
 		.expect(200);
 	});
 
-	// consultar usuários por query 
-	
-	test('receber usuários por consulta query nickStartWith', async () => {
+	// Receber usuário especificado por query
+	test('Receber o usuário especificado pelo query', async () => {
 		const response = await supertest(fastify.server)
 		.get('/api/users/search')
 		.expect(200);
 	});
 
-	// registrar novo usuário
-	test.skip('registrar um novo usuário', async () => {
+	// Registrar novo usuário
+	test.skip('Registrar novo usuário no banco de dados', async () => {
 		const response = await supertest(fastify.server)
 		.post('/api/users/register')
+		.send({})
+		.expect(201);
+	})
+
+	// Substituir completamente um novo usuário
+	test('Atualizar por completo um novo usuário', async () => {
+		const response = await supertest(fastify.server)
+		.put('/api/users/update/1')
+		.send({})
 		.expect(200);
 	});
 
-	// Atualização completa de um usuário
-	test('Atualização completa de um usuário', async () => {
+	// Obter dados do usuário
+	test('Obter dados do usuário especificado por ID', async () => {
 		const response = await supertest(fastify.server)
-		.post('/api/users/update/1')
+		.get('/api/users/teste/stats')
 		.expect(200);
 	});
 
-	// Obter status de um usuário especificado por ID
-	test('Obter status de um usuário', async () => {
-		const response = await supertest(fastify.server)
-		.get('/api/users/1/stats')
+	// Fazer o upload de um avatar
+	test('Enviar um avatar ao banco de dados, para o usuário especificado', async () => {
+		const response = supertest(fastify.server)
+		.post('/api/users/1/avatar')
 		.expect(200);
 	});
-
-	// Upload an avatar
-	test('Enviando o avatar do usuário para o servidor', async () => {
-		const response = await supertest(fastify.server)
-		.get('/api/users/1/avatar')
-		.expect(200);
-	});
-});
+})

@@ -73,13 +73,13 @@ async function usersRoutes(fastify, options) {
 
 	// Obtain status of user
 	fastify.get('/:id/stats', async (request, reply) => {
-		const { id } = req.params;
+		const { id } = request.params;
 		return reply.code(200).send('Status do usuário, vitórias, derrotas e mais');
 	});
 
 	// Upload an avatar
 	fastify.post('/:id/avatar', async (request, reply) => {
-		const { id } = req.params;
+		const { id } = request.params;
 		return reply.code(200).send('O avatar foi enviado camarada');
 	});
 }

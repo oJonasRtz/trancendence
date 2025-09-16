@@ -20,7 +20,8 @@ async function lobbiesRoutes(fastify, options) {
 	});
 
 	// Fazer o usuário sair da sala de espera, mas o jogo não começou
-	fastify.post(':id/leave', async (request, reply) => {
+	fastify.post('/:id/leave', async (request, reply) => {
+		const { id } = request.params;
 		return reply.code(200).send('Usuário pediu para sair da sala');
 	});
 
