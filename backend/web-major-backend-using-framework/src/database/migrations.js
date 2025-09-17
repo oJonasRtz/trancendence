@@ -1,6 +1,19 @@
-const fs = require('fs');
-const path = require('path');
-const DatabaseConnection = require('./connection');
+import fs from 'fs';
+import path from 'path';
+import DatabaseConnection from './connection.js';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+function inputInDataBase(db, sql) {
+	return new Promise((resolve, reject) => {
+		db.exec(sql, (err) => {
+			if (err) return reject(err);
+			resolve();
+		});
+	});
+}
 
 class DatabaseMigrations {
   constructor() {
@@ -8,18 +21,23 @@ class DatabaseMigrations {
   }
 
   async runMigrations() {
+	console.log('Tô aqui, meu amigo');
     try {
       await this.dbConnection.connect();
       const db = this.dbConnection.getDatabase();
       
-      const schemaPath = path.join(__dirname, 'schema.sql');
-      const schema = fs.readFileSync(schemaPath, 'utf8');
+      const migrations = ['authSchema.sql', 'schema.sql'];
+
+      for (const schemaSQL of migrations) {
+
+	console.log(`Estou lendo ${schemaSQL}`);
+	let schemaPath = path.join(__dirname, 'schemas', schemaSQL);
+	let schema = fs.readFileSync(schemaPath, 'utf8');
       
-      const statements = schema.split(';').filter(stmt => stmt.trim().length > 0);
-      
-      for (const statement of statements) {
-        await this.executeStatement(db, statement.trim());
-      }
+	console.log('oi');
+	await inputInDataBase(db, schema);
+	console.log(`Schema ${schemaSQL} created successfully\n`);
+}
       
       console.log('Database migrations completed successfully');
       await this.dbConnection.close();
@@ -43,19 +61,6 @@ class DatabaseMigrations {
       });
     });
   }
-}
-
-if (require.main === module) {
-  const migrations = new DatabaseMigrations();
-  migrations.runMigrations()
-    .then(() => {
-      console.log('Migrations completed');
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error('Migration error:', error);
-      process.exit(1);
-    });
 }
 
 export default DatabaseMigrations;
