@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import config from './config';
+import config from './config.js';
 
 class DatabaseConnection {
   constructor() {

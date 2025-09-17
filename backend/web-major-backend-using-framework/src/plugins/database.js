@@ -1,6 +1,6 @@
 import fp from 'fastify-plugin';
-import DatabaseConnection from '../database/connection';
-import DatabaseQueries from '../database/queries';
+import DatabaseConnection from '../database/connection.js';
+import DatabaseQueries from '../database/queries.js';
 
 async function databasePlugin(fastify, options) {
   const dbConnection = new DatabaseConnection();

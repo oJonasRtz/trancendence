@@ -1,4 +1,4 @@
-import AuthUtils from '../utils/auth';
+import AuthUtils from '../utils/auth.js';
 
 class DatabaseQueries {
   constructor(db) {

@@ -1,5 +1,5 @@
 import path from 'path';
-import AuthUtils from '../src/utils/auth';
+import AuthUtils from '../src/utils/auth.js';
 
 async function usersRoutes(fastify, options) {
 
