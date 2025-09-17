@@ -1,29 +1,34 @@
 // Set framework
 
-const fastify = require('fastify')({ logger: true });
-
-const path = require('path');
-
+import Fastify from 'fastify';
+import path from 'path';
+import { fileURLToPath } from 'url';
 // Set routes path
 
-const userRoutes = require(path.resolve(__dirname, 'routes', 'users.js'));
-const authRoutes = require(path.resolve(__dirname, 'routes', 'auth.js'));
-const relationsRoutes = require(path.resolve(__dirname, 'routes', 'relations.js'));
-const lobbiesRoutes = require(path.resolve(__dirname, 'routes', 'lobbies.js'));
-const matchmakingRoutes = require(path.resolve(__dirname, 'routes', 'matchmaking.js'));
-const matchesRoutes = require(path.resolve(__dirname, 'routes', 'matches.js'));
-const tournamentRoutes = require(path.resolve(__dirname, 'routes', 'tournaments.js'));
-const channelsRoutes = require(path.resolve(__dirname, 'routes', 'channels.js'));
-const healthRoutes = require(path.resolve(__dirname, 'routes', 'health.js'));
+const fastify = Fastify({ logger: true });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import userRoutes from './routes/users.js';
+import authRoutes from './routes/auth.js';
+import relationsRoutes from './routes/relations.js';
+import lobbiesRoutes from './routes/lobbies.js';
+import matchmakingRoutes from './routes/matchmaking.js';
+import matchesRoutes from './routes/matches.js';
+import tournamentRoutes from './routes/tournaments.js';
+import channelsRoutes from './routes/channels.js';
+import healthRoutes from './routes/health.js';
 
 // Set handlers
 
-require(path.resolve(__dirname, 'handlers', 'notFoundHandler.js'))(fastify);
-require(path.resolve(__dirname, 'handlers', 'errorHandler.js'))(fastify);
+import notFoundHandler from './handlers/notFoundHandler.js';
+import errorHandler from './handlers/errorHandler.js';
 
 // Set Database
 
-fastify.register(require(path.resolve(__dirname, 'src', 'plugins', 'database')));
+import dbPlugin from './src/plugins/database.js';
+
+fastify.register(dbPlugin);
 
 fastify.get('/', async (request, reply) => {
   return { hello: 'world', database: 'connected' };
@@ -41,4 +46,4 @@ fastify.register(tournamentRoutes, { prefix: '/api/tournaments' });
 fastify.register(channelsRoutes, { prefix: '/api/channels' });
 fastify.register(healthRoutes);
 
-module.exports = fastify;
+export default fastify;

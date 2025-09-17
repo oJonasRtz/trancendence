@@ -1,4 +1,4 @@
-const AuthUtils = require('../utils/auth');
+import AuthUtils from '../utils/auth';
 
 class DatabaseQueries {
   constructor(db) {
@@ -277,4 +277,4 @@ class DatabaseQueries {
   }
 }
 
-module.exports = DatabaseQueries;
+export default DatabaseQueries;

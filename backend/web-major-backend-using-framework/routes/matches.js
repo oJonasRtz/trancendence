@@ -25,4 +25,4 @@ async function matchesRoutes (fastify, options) {
 	});
 }
 
-module.exports = matchesRoutes;
+export default matchesRoutes;

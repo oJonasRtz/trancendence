@@ -50,4 +50,4 @@ async function tournamentRoutes(fastify, options) {
 	});
 }
 
-module.exports = tournamentRoutes;
+export default tournamentRoutes;

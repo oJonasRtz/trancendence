@@ -25,4 +25,4 @@ async function channelsRoutes(fastify, options) {
 	});
 }
 
-module.exports = channelsRoutes;
+export default channelsRoutes;

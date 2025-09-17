@@ -21,4 +21,4 @@ async function relationsRoutes(fastify, options) {
 	});
 }
 
-module.exports = relationsRoutes;
+export default relationsRoutes;

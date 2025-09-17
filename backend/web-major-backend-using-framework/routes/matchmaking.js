@@ -15,4 +15,4 @@ async function matchmakingRoutes(fastify, options) {
 	});
 }
 
-module.exports = matchmakingRoutes;
+export default matchmakingRoutes;

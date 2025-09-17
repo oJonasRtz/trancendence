@@ -31,4 +31,4 @@ async function lobbiesRoutes(fastify, options) {
 	});
 }
 
-module.exports = lobbiesRoutes;
+export default lobbiesRoutes;

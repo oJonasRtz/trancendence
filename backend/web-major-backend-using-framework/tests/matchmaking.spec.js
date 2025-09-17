@@ -1,7 +1,7 @@
-const supertest = require('supertest');
-const fs = require('node:fs/promises');
-const path = require('path');
-const fastify = require(path.resolve(__dirname, '..', 'index.js'));
+import supertest from 'supertest';
+import fs from 'node:fs/promises';
+import path from 'path';
+import fastify from '../index.js';
 
 beforeAll(async () => {
 	await fastify.ready();

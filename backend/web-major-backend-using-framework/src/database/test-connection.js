@@ -1,5 +1,5 @@
-const DatabaseConnection = require('./connection');
-const DatabaseQueries = require('./queries');
+import DatabaseConnection from './connection';
+import DatabaseQueries from './queries';
 
 async function testDatabaseConnection() {
   const dbConnection = new DatabaseConnection();
@@ -60,4 +60,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = testDatabaseConnection;
+export default testDatabaseConnection;

@@ -1,6 +1,5 @@
-const path = require('path');
-const server = require(path.resolve(__dirname, 'index.js'));
-const dotenv = require('dotenv');
+import server from 'index.js';
+import dotenv from 'dotenv';
 
 dotenv.config();
 

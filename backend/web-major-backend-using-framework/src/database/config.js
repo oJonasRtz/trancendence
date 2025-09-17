@@ -1,12 +1,12 @@
-const path = require('path');
+import path from 'path';
 
 const config = {
   database: {
-    filename: path.join(__dirname, '../../database.sqlite'),
+    filename: path.join('../../database.sqlite'),
     options: {
       verbose: console.log
     }
   }
 };
 
-module.exports = config;
+export default config;

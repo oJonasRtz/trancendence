@@ -19,4 +19,4 @@ async function healthRoutes(fastify){
 });
 }
 
-module.exports = healthRoutes;
+export default healthRoutes;

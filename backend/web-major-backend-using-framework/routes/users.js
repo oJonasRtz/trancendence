@@ -1,5 +1,5 @@
-const path = require('path');
-const AuthUtils = require(path.resolve(__dirname, '..', 'src', 'utils', 'auth'));
+import path from 'path';
+import AuthUtils from '../src/utils/auth';
 
 async function usersRoutes(fastify, options) {
 
@@ -83,4 +83,5 @@ async function usersRoutes(fastify, options) {
 		return reply.code(200).send('O avatar foi enviado camarada');
 	});
 }
-module.exports = usersRoutes; 
+
+export default usersRoutes; 

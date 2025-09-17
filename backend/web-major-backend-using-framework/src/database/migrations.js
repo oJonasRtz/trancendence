@@ -58,4 +58,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = DatabaseMigrations;
+export default DatabaseMigrations;

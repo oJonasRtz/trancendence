@@ -1,4 +1,4 @@
-module.exports = function (fastify) {
+export default function (fastify) {
 	fastify.setNotFoundHandler((request, reply) => {
         reply
                 .code(404)
