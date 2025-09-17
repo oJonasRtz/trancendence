@@ -18,6 +18,11 @@ async function channelsRoutes(fastify, options) {
 	fastify.get('/:id/presence', async (request, reply) => {
 		return reply.code(200).send('status de todos, online/playing/lobby');
 	});
+
+	// Criar um novo canal
+	fastify.post('/create', async (request, reply) => {
+		return reply.code(200).send('novo canal criado =D');
+	});
 }
 
 module.exports = channelsRoutes;

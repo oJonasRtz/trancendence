@@ -20,7 +20,7 @@ async function matchesRoutes (fastify, options) {
 	});
 
 	// encerrar a partida
-	fastify.patch(':id', async (request, reply) => {
+	fastify.patch('/:id', async (request, reply) => {
 		return reply.code(200).send('Encerrar a partida administrativamente');
 	});
 }
