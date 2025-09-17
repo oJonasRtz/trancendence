@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 // Set routes path
 
-const fastify = Fastify({ logger: true });
+const fastify = Fastify({ logger: false });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
