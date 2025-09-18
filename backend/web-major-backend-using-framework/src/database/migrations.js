@@ -33,11 +33,10 @@ class DatabaseMigrations {
 	let schema = fs.readFileSync(schemaPath, 'utf8');
       
 	await inputInDataBase(db, schema);
-	console.log(`Schema ${schemaSQL} created successfully\n`);
 }
       
       console.log('Database migrations completed successfully');
-      await this.dbConnection.close();
+     // await this.dbConnection.close();
       
     } catch (error) {
       console.error('Migration failed:', error);
