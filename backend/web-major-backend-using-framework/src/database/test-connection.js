@@ -1,5 +1,5 @@
 import DatabaseConnection from './connection';
-import DatabaseQueries from './queries';
+import DatabaseQueries from './queries/queries.js';
 
 async function testDatabaseConnection() {
   const dbConnection = new DatabaseConnection();
@@ -42,7 +42,7 @@ async function testDatabaseConnection() {
     console.log('All database tests passed!');
     
   } catch (error) {
-    console.error('✗ Database test failed:', error.message);
+    onsole.error('✗ Database test failed:', error.message);
     await dbConnection.close();
     throw error;
   }

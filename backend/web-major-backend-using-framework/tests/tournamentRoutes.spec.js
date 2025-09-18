@@ -23,7 +23,7 @@ describe ('Que comece o torneio!!! Eeeeeeehhhhhhhh', () => {
 	test('Listando todos os torneios existentes', async () => {
 		const response = await supertest(fastify.server)
 		.get('/api/tournaments')
-		.expect(500);
+		.expect(200);
 	});
 
 	// Obter um torneio específico
