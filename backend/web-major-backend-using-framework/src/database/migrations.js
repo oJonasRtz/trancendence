@@ -21,7 +21,6 @@ class DatabaseMigrations {
   }
 
   async runMigrations() {
-	console.log('Tô aqui, meu amigo');
     try {
       await this.dbConnection.connect();
       const db = this.dbConnection.getDatabase();
@@ -30,11 +29,9 @@ class DatabaseMigrations {
 
       for (const schemaSQL of migrations) {
 
-	console.log(`Estou lendo ${schemaSQL}`);
 	let schemaPath = path.join(__dirname, 'schemas', schemaSQL);
 	let schema = fs.readFileSync(schemaPath, 'utf8');
       
-	console.log('oi');
 	await inputInDataBase(db, schema);
 	console.log(`Schema ${schemaSQL} created successfully\n`);
 }
@@ -53,7 +50,7 @@ class DatabaseMigrations {
     return new Promise((resolve, reject) => {
       db.run(statement, (err) => {
         if (err) {
-          console.error('Error executing statement:', statement);
+          console.error('Error executing statement: ', statement);
           reject(err);
         } else {
           resolve();
