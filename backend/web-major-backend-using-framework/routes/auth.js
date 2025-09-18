@@ -1,8 +1,7 @@
 async function authRoutes (fastify, options) {
 	// Register of user
 	fastify.post('/register', async (request, reply) => {
-		return reply.code(200).send('Registro do usuário feito');	
-	});
+		return reply.code(200).send('Registro do usuário feito');	});
 
 	// Login
 	fastify.post('/login', async (request, reply) => {
