@@ -3,11 +3,9 @@ import path from 'path';
 import DatabaseConnection from '../database/connection.js';
 import DatabaseMigration from '../database/migrations.js';
 
-async function importAllQueries(fastify) {
+async function importAllQueries(fastify, db) {
 	const queries = ['queries.js', 'auth.js'];
 	const dbQueries = {};
-	const dbConnection = new DatabaseConnection();
-	const db = dbConnection.getDatabase();
 
 	for ( const queryName of queries ) {
 		let queryObject = await import(`../database/queries/${queryName}`);
@@ -23,9 +21,9 @@ async function databasePlugin(fastify, options) {
   
   try {
     await dbConnection.connect();
-    const db = dbConnection.getDatabase();
+    const db = await dbConnection.getDatabase();
     
-    await importAllQueries(fastify);
+    await importAllQueries(fastify, db);
 	  
     fastify.decorate('db', db);
     fastify.decorate('dbConnection', dbConnection);

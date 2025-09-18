@@ -4,7 +4,7 @@ class DatabaseQueries {
   constructor(db) {
     this.db = db;
   }
-	async registerUser (username, email, password) => {
+	async registerUser (username, email, password) {
 		const passwordHash = await AuthUtils.hashPassword(password);
 		return new Promise((resolve, reject) => {
 			const stmt = this.db.prepare(`
@@ -21,5 +21,6 @@ class DatabaseQueries {
 			}
 		});
 	}); 
+	};
 };
 export default DatabaseQueries;

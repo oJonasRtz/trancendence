@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS auth (
 	password_version INTEGER DEFAULT 1,
 	-- You forgot the password and made mistakes so many times
 	locked_until TEXT DEFAULT NULL,
-	-- Is the user online or offline the account?
+	-- Is the user account?
 	is_active BOOLEAN DEFAULT 0,
 	-- Last login of the user
 	last_login_at TEXT DEFAULT NULL,
