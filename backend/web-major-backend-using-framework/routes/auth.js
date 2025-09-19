@@ -1,13 +1,17 @@
+import AuthUtils from '../src/utils/auth.js'
+
 async function authRoutes (fastify, options) {
 	// Register of user
 	fastify.post('/register', async (request, reply) => {
 		const { username, email, password } = request.body;
 		try {
+			if (!AuthUtils.validateUsername(username) || !AuthUtils.validateEmail(email) || !AuthUtils.validatePassword(password))
+				return reply.code(400).send({ error: 'Invalid input'});
 			await fastify.dbQueries.auth.registerUser(username, email, password);
 		} catch (err) {
-			return reply.code(500).send(`Deu tudo errado mano: ${err}`);
+			return reply.code(500).send({ error: 'Internal Server Error' });
 		}
-		return reply.code(200).send('Registro do usuário feito');
+		return reply.code(201).send({ message: 'User registering successfully' });
 	});
 
 	// Login

@@ -1,6 +1,16 @@
 import supertest from 'supertest';
 import fs from 'node:fs/promises';
+import path from 'path';
+import { runMigrations } from '../src/database/migration.js';
 import fastify from '../index.js';
+import os from 'os';
+
+beforeEach(async () => {
+	DB_PATH = path.join(os.tmpdir(), `test-${Date.now()}.sqlite`);
+	process.env.DB_PATH = DB_PATH;
+
+	await ();
+});
 
 beforeAll(async () => {
 	await fastify.ready();
@@ -12,10 +22,15 @@ afterAll(async () => {
 
 describe('Testando autenticação do usuário', () => {
 	test('criação de usuário', async () => {
+		const user = {
+			username: 'Indiana Jones',
+			email: 'indianaJones@gmail.com',
+			password: 'IssoÉUmaSenhaForte'
+		};
 		const response = await supertest(fastify.server)
 		.post('/api/test/users/register')
-		.send({})
-		.expect(200);
+		.send(user)
+		.expect(201);
 	});
 	test('login do usuário', async () => {
 		const response = await supertest(fastify.server)
